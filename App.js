@@ -23,8 +23,8 @@ var scale = 1/2;
 class FlexBoxItem extends Component {
   render() {
     return (
-      <View style = {styles.card}>
-        <Text style = {styles.cardTitle}>{this.props.title}</Text>
+      // <View style = {styles.card}>
+      //   <Text style = {styles.cardTitle}>{this.props.title}</Text>
         <View style = {styles.cardFlexBox}>
           <View style = {styles.cardFlexBoxItem}>
           <Text style = {styles.cardFlexBoxTitle}>{"PHP"}</Text>
@@ -39,19 +39,30 @@ class FlexBoxItem extends Component {
           <Text style = {styles.cardFlexBoxContent}>{this.props.data.ios}</Text>
           </View>
         </View>
-      </View>
+      // </View>
     );
   }
 }
 class ImageItem extends Component {
   render() {
     return (
+      // <View style = {styles.card}>
+      //   <Text style = {styles.cardTitle}>{this.props.title}</Text>
+        <View flexDirection = "row" style = {{alignItems:'center'}}>
+          <Image source = {{uri:this.props.data.imgUrl}} style = {styles.cardImage}/>
+          <Text style = {styles.cardText}>{this.props.data.content}</Text>
+        </View>
+      // </View>
+    );
+  }
+}
+
+class Card extends Component{
+  render(){
+    return (
       <View style = {styles.card}>
         <Text style = {styles.cardTitle}>{this.props.title}</Text>
-        <View flexDirection = "row" style = {{alignItems:'center'}}>
-          <Image source = {{uri:this.props.imgUrl}} style = {styles.cardImage}/>
-          <Text style = {styles.cardText}>{this.props.content}</Text>
-        </View>
+        {this.props.children}
       </View>
     );
   }
@@ -110,7 +121,7 @@ export default class UserInfo extends Component {
             <Text style = {styles.description}>{this.state.description}</Text>
         </View>
           <ScrollView style = {styles.content}>
-            <FlexBoxItem title = "认证技术级别"
+            {/* <FlexBoxItem title = "认证技术级别"
               data = {this.state.info.techLevel}/>
             <FlexBoxItem title = "奇迹技术星"
               data = {this.state.info.techStar}/>
@@ -119,7 +130,19 @@ export default class UserInfo extends Component {
               imgUrl = {this.state.info.eduExp.imgUrl}/>
             <ImageItem title = "居住地" 
               content = {this.state.info.address.content}
-              imgUrl = {this.state.info.address.imgUrl}/>
+              imgUrl = {this.state.info.address.imgUrl}/> */}
+            <Card title = "认证技术级别">
+              <FlexBoxItem data = {this.state.info.techLevel}/>
+            </Card>
+            <Card title = "奇迹技术星">
+              <FlexBoxItem data = {this.state.info.techStar}/>
+            </Card>
+            <Card title = "教育经历">
+              <ImageItem data = {this.state.info.eduExp}/>
+            </Card>
+            <Card title = "居住地">
+              <ImageItem data = {this.state.info.address}/>
+            </Card>
           </ScrollView>
       </View>
     );
